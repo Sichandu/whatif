@@ -1,0 +1,2092 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatIfVerse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .user-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 5px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin: 20px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar input:focus {
+            border-color: #667eea;
+        }
+
+        .search-bar button {
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: #5a6fd8;
+        }
+
+        .thoughts-list {
+            padding: 0 20px 20px;
+        }
+
+        .thought-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .thought-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .nickname-badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .whatif-thought {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .responses-section {
+            margin-top: 20px;
+        }
+
+        .top-responses {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .response-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            position: relative;
+        }
+
+        .response-card.top-1 {
+            border-color: #feca57;
+            background: linear-gradient(135deg, #fff9e6, #fff);
+        }
+
+        .response-card.top-2 {
+            border-color: #bdc3c7;
+            background: linear-gradient(135deg, #f8f9fa, #fff);
+        }
+
+        .rank-badge {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.9em;
+        }
+
+        .rank-1 {
+            background: #feca57;
+        }
+
+        .rank-2 {
+            background: #bdc3c7;
+        }
+
+        .response-content {
+            margin: 10px 0;
+            color: #34495e;
+        }
+
+        .response-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .total-score {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+
+        .view-insight-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .view-insight-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .scoring-system {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .score-btn {
+            width: 35px;
+            height: 35px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .score-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .score-btn.negative {
+            color: #e74c3c;
+        }
+
+        .score-btn.positive {
+            color: #27ae60;
+        }
+
+        .score-btn.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .other-responses {
+            margin-top: 15px;
+        }
+
+        .other-response {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 3px solid #95a5a6;
+        }
+
+        .add-response {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .add-response input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .add-response input:focus {
+            border-color: #667eea;
+        }
+
+        .add-response button {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 2em;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+            z-index: 100;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .modal input, .modal textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .modal textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .modal input:focus, .modal textarea:focus {
+            border-color: #667eea;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .modal-btn.primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .modal-btn.secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .insight-modal .modal-content {
+            max-width: 600px;
+        }
+
+        .top-response-insight {
+            background: linear-gradient(135deg, #fff9e6, #fff);
+            border: 2px solid #feca57;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-modal {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .auth-modal h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 20px;
+            color: #e74c3c;
+            background: #ffeaea;
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #7f8c8d;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .top-responses {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .scoring-system {
+                justify-content: center;
+            }
+            
+            .user-info {
+                position: static;
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>WhatIfVerse</h1>
+            <p>Share your hypothetical thoughts and explore others' imaginations</p>
+            <div class="user-info" id="userInfo" style="display: none;">
+                <span class="user-badge">Hello, <span id="currentUserNickname"></span>!</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search by friend's nickname...">
+            <button onclick="searchThoughts()">Search</button>
+            <button onclick="loadThoughts()" style="background: #95a5a6;">Show All</button>
+        </div>
+
+        <div class="thoughts-list" id="thoughtsList">
+            <div class="loading">Loading thoughts...</div>
+        </div>
+    </div>
+
+    
+    <button class="floating-btn" onclick="handleCreateThought()">+</button>
+
+    
+    <div class="modal" id="thoughtModal">
+        <div class="modal-content">
+            <h2>Share Your WhatIf Thought</h2>
+            <textarea id="thoughtContent" placeholder="What if..."></textarea>
+            <div class="modal-buttons">
+                <button class="modal-btn secondary" onclick="hideThoughtModal()">Cancel</button>
+                <button class="modal-btn primary" onclick="createThought()">Share Thought</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal insight-modal" id="insightModal">
+        <div class="modal-content">
+            <h2>Top Response Insight</h2>
+            <div id="insightContent">
+               
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" onclick="hideInsightModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-modal">
+            <h2>Join WhatIfVerse</h2>
+            <p>To share thoughts and interact with the community, create your unique nickname.</p>
+            <p style="font-size: 0.9em; color: #7f8c8d; margin-bottom: 20px;">Your nickname will be active for 30 days</p>
+            <input type="text" id="nicknameInput" placeholder="Enter your creative nickname" style="width: 100%; padding: 12px; margin: 20px 0; border: 2px solid #e0e0e0; border-radius: 8px;">
+            <div style="display: flex; gap: 10px;">
+                <button class="modal-btn secondary" onclick="hideAuthModal()" style="flex: 1;">Cancel</button>
+                <button class="modal-btn primary" onclick="registerUser()" style="flex: 1;">Join Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        let currentUser = null;
+        let currentToken = null;
+
+        // Check for existing session on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedToken = localStorage.getItem('whatif_token');
+            const savedUser = localStorage.getItem('whatif_user');
+            const expiry = localStorage.getItem('whatif_expiry');
+            
+            if (savedToken && savedUser && expiry && new Date(expiry) > new Date()) {
+                currentToken = savedToken;
+                currentUser = savedUser;
+                updateUserInterface();
+            }
+            loadThoughts();
+        });
+
+        // Update UI based on authentication state
+        function updateUserInterface() {
+            const userInfo = document.getElementById('userInfo');
+            const currentUserNickname = document.getElementById('currentUserNickname');
+            
+            if (currentUser) {
+                userInfo.style.display = 'flex';
+                currentUserNickname.textContent = currentUser;
+            } else {
+                userInfo.style.display = 'none';
+            }
+        }
+
+        // Handle thought creation with auth check
+        function handleCreateThought() {
+            if (!currentToken) {
+                showAuthModal();
+                return;
+            }
+            showThoughtModal();
+        }
+
+        // Authentication functions
+        function showAuthModal() {
+            document.getElementById('authOverlay').style.display = 'flex';
+        }
+
+        function hideAuthModal() {
+            document.getElementById('authOverlay').style.display = 'none';
+            document.getElementById('nicknameInput').value = '';
+        }
+
+        async function registerUser() {
+            const nickname = document.getElementById('nicknameInput').value.trim();
+            if (!nickname) {
+                alert('Please enter a nickname');
+                return;
+            }
+
+            if (nickname.length < 2) {
+                alert('Nickname must be at least 2 characters long');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ nickname })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    currentToken = data.token;
+                    currentUser = nickname;
+                    
+                    // Save to localStorage
+                    localStorage.setItem('whatif_token', data.token);
+                    localStorage.setItem('whatif_user', nickname);
+                    localStorage.setItem('whatif_expiry', data.expires_at);
+                    
+                    hideAuthModal();
+                    updateUserInterface();
+                    loadThoughts();
+                    
+                    // Show success message and prompt for thought creation
+                    setTimeout(() => {
+                        if (confirm('Welcome to WhatIfVerse! 🎉 Would you like to share your first thought?')) {
+                            showThoughtModal();
+                        }
+                    }, 500);
+                } else {
+                    const error = await response.json();
+                    alert(error.detail);
+                }
+            } catch (error) {
+                alert('Error registering user. Please make sure the backend server is running.');
+            }
+        }
+
+        function logout() {
+            currentToken = null;
+            currentUser = null;
+            localStorage.removeItem('whatif_token');
+            localStorage.removeItem('whatif_user');
+            localStorage.removeItem('whatif_expiry');
+            updateUserInterface();
+            loadThoughts();
+        }
+
+        // API call wrapper with auth check
+        async function makeAuthenticatedRequest(url, options = {}) {
+            if (!currentToken) {
+                showAuthModal();
+                throw new Error('Authentication required');
+            }
+
+            const defaultOptions = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': currentToken,
+                    ...options.headers
+                }
+            };
+
+            const finalOptions = { ...defaultOptions, ...options };
+            
+            const response = await fetch(url, finalOptions);
+            if (response.status === 401) {
+                // Token expired
+                localStorage.removeItem('whatif_token');
+                localStorage.removeItem('whatif_user');
+                localStorage.removeItem('whatif_expiry');
+                currentToken = null;
+                currentUser = null;
+                updateUserInterface();
+                showAuthModal();
+                throw new Error('Session expired. Please login again.');
+            }
+            return response;
+        }
+
+        // Thought management
+        async function loadThoughts() {
+            try {
+                const response = await fetch(`${API_BASE}/thoughts`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const thoughts = await response.json();
+                displayThoughts(thoughts);
+            } catch (error) {
+                console.error('Error loading thoughts:', error);
+                document.getElementById('thoughtsList').innerHTML = 
+                    '<div class="error">Error loading thoughts. Please check if the backend server is running on port 8000.</div>';
+            }
+        }
+
+        function displayThoughts(thoughts) {
+            const container = document.getElementById('thoughtsList');
+            
+            if (thoughts.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No thoughts yet</h3>
+                        <p>Be the first to share a WhatIf thought!</p>
+                        ${!currentUser ? '<p><em>Create an account to start sharing</em></p>' : ''}
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = thoughts.map(thought => `
+                <div class="thought-card">
+                    <div class="thought-header">
+                        <div class="nickname-badge">${thought.user_nickname}</div>
+                    </div>
+                    <div class="whatif-thought">${thought.content}</div>
+                    
+                    <div class="responses-section">
+                        <h3>Top Responses:</h3>
+                        <div class="top-responses">
+                            ${(thought.top_responses || []).slice(0, 2).map((response, index) => `
+                                <div class="response-card top-${index + 1}">
+                                    <div class="rank-badge rank-${index + 1}">${index + 1}</div>
+                                    <div class="response-content">${response.content}</div>
+                                    <div class="response-footer">
+                                        <div class="total-score">Score: ${response.total_score || 0}</div>
+                                        ${index === 0 ? `<button class="view-insight-btn" onclick="showInsight('${response._id}')">View Insight</button>` : ''}
+                                    </div>
+                                    <div class="scoring-system">
+                                        ${generateScoreButtons(response._id)}
+                                    </div>
+                                </div>
+                            `).join('')}
+                            ${(thought.top_responses || []).length === 0 ? '<p>No responses yet. Be the first to respond!</p>' : ''}
+                        </div>
+
+                        ${(thought.other_responses || []).length > 0 ? `
+                            <div class="other-responses">
+                                <h4>Other Responses:</h4>
+                                ${thought.other_responses.map(response => `
+                                    <div class="other-response">
+                                        <div class="response-content">${response.content}</div>
+                                        <div class="response-footer">
+                                            <div class="total-score">Score: ${response.total_score || 0}</div>
+                                            <div class="scoring-system">
+                                                ${generateScoreButtons(response._id)}
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                                ${thought.total_responses > 7 ? `<p>... and ${thought.total_responses - 7} more responses</p>` : ''}
+                            </div>
+                        ` : ''}
+
+                        <div class="add-response">
+                            <input type="text" id="response-${thought._id}" placeholder="Add your response..." onkeypress="if(event.key === 'Enter') createResponse('${thought._id}')">
+                            <button onclick="createResponse('${thought._id}')">Respond</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function generateScoreButtons(responseId) {
+            const scores = [];
+            for (let i = -5; i <= 10; i++) {
+                const scoreClass = i < 0 ? 'negative' : i > 0 ? 'positive' : '';
+                scores.push(`
+                    <button class="score-btn ${scoreClass}" 
+                            onclick="rateResponse('${responseId}', ${i})">
+                        ${i > 0 ? '+' : ''}${i}
+                    </button>
+                `);
+            }
+            return scores.join('');
+        }
+
+        // Modal functions
+        function showThoughtModal() {
+            document.getElementById('thoughtModal').style.display = 'flex';
+        }
+
+        function hideThoughtModal() {
+            document.getElementById('thoughtModal').style.display = 'none';
+            document.getElementById('thoughtContent').value = '';
+        }
+
+        function showInsight(responseId) {
+            document.getElementById('insightContent').innerHTML = `
+                <div class="top-response-insight">
+                    <h3>🌟 Top Ranked Response Insight</h3>
+                    <p>This response received the highest score from the community because it was the most engaging, creative, and thought-provoking.</p>
+                    <p><strong>Why it works:</strong></p>
+                    <ul>
+                        <li>Creative thinking outside the box</li>
+                        <li>Clear and engaging presentation</li>
+                        <li>Positive community reception</li>
+                    </ul>
+                </div>
+            `;
+            document.getElementById('insightModal').style.display = 'flex';
+        }
+
+        function hideInsightModal() {
+            document.getElementById('insightModal').style.display = 'none';
+        }
+
+        // API interaction functions
+        async function createThought() {
+            const content = document.getElementById('thoughtContent').value.trim();
+            if (!content) {
+                alert('Please enter your thought');
+                return;
+            }
+
+            if (content.length < 10) {
+                alert('Thought should be at least 10 characters long');
+                return;
+            }
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/thoughts`, {
+                    method: 'POST',
+                    body: JSON.stringify({ content })
+                });
+
+                if (response.ok) {
+                    hideThoughtModal();
+                    loadThoughts();
+                    alert('Thought shared successfully! 🎉');
+                } else {
+                    const error = await response.json();
+                    alert(error.detail);
+                }
+            } catch (error) {
+                if (error.message !== 'Authentication required') {
+                    alert('Error creating thought: ' + error.message);
+                }
+            }
+        }
+
+        async function createResponse(thoughtId) {
+            const input = document.getElementById(`response-${thoughtId}`);
+            const content = input.value.trim();
+            
+            if (!content) {
+                alert('Please enter your response');
+                return;
+            }
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/responses`, {
+                    method: 'POST',
+                    body: JSON.stringify({ thought_id: thoughtId, content })
+                });
+
+                if (response.ok) {
+                    input.value = '';
+                    loadThoughts();
+                } else {
+                    const error = await response.json();
+                    alert(error.detail);
+                }
+            } catch (error) {
+                if (error.message !== 'Authentication required') {
+                    alert('Error creating response: ' + error.message);
+                }
+            }
+        }
+
+        async function rateResponse(responseId, score) {
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/scores`, {
+                    method: 'POST',
+                    body: JSON.stringify({ response_id: responseId, score })
+                });
+
+                if (response.ok) {
+                    // Real-time update - reload thoughts to show updated scores and rankings
+                    loadThoughts();
+                } else {
+                    const error = await response.json();
+                    alert(error.detail);
+                }
+            } catch (error) {
+                // Authentication error is already handled by makeAuthenticatedRequest
+                if (error.message !== 'Authentication required') {
+                    console.error('Error rating response:', error);
+                }
+            }
+        }
+
+        async function searchThoughts() {
+            const nickname = document.getElementById('searchInput').value.trim();
+            if (!nickname) {
+                loadThoughts();
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/search/${encodeURIComponent(nickname)}`);
+                if (response.ok) {
+                    const thoughts = await response.json();
+                    displayThoughts(thoughts);
+                    if (thoughts.length === 0) {
+                        document.getElementById('thoughtsList').innerHTML = `
+                            <div class="empty-state">
+                                <h3>No thoughts found</h3>
+                                <p>No thoughts found for user "${nickname}"</p>
+                                <button onclick="loadThoughts()" style="margin-top: 10px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 20px; cursor: pointer;">Show All Thoughts</button>
+                            </div>
+                        `;
+                    }
+                } else {
+                    alert('Error searching for user');
+                }
+            } catch (error) {
+                alert('Error searching: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatIfVerse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .auth-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .login-btn, .logout-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover, .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .user-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-bar input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar input:focus {
+            border-color: #667eea;
+        }
+
+        .search-bar button {
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+
+        .search-bar button:hover {
+            background: #5a6fd8;
+        }
+
+        .search-bar button.secondary {
+            background: #95a5a6;
+        }
+
+        .search-bar button.secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .thoughts-list {
+            padding: 0 20px 20px;
+        }
+
+        .thought-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .thought-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nickname-badge {
+            background: #667eea;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .whatif-thought {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            font-style: italic;
+            word-wrap: break-word;
+        }
+
+        .responses-section {
+            margin-top: 20px;
+        }
+
+        .top-responses {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .response-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            position: relative;
+        }
+
+        .response-card.top-1 {
+            border-color: #feca57;
+            background: linear-gradient(135deg, #fff9e6, #fff);
+        }
+
+        .response-card.top-2 {
+            border-color: #bdc3c7;
+            background: linear-gradient(135deg, #f8f9fa, #fff);
+        }
+
+        .rank-badge {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.9em;
+            z-index: 2;
+        }
+
+        .rank-1 {
+            background: #feca57;
+        }
+
+        .rank-2 {
+            background: #bdc3c7;
+        }
+
+        .response-content {
+            margin: 10px 0;
+            color: #34495e;
+            word-wrap: break-word;
+        }
+
+        .response-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .total-score {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #2c3e50;
+            background: #f8f9fa;
+            padding: 4px 12px;
+            border-radius: 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .view-insight-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+
+        .view-insight-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .scoring-dropdown {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .score-select {
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.3s;
+            min-width: 80px;
+        }
+
+        .score-select:focus {
+            border-color: #667eea;
+        }
+
+        .apply-score-btn {
+            padding: 8px 12px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .apply-score-btn:hover {
+            background: #219653;
+        }
+
+        .other-responses {
+            margin-top: 15px;
+        }
+
+        .other-response {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 3px solid #95a5a6;
+        }
+
+        .add-response {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .add-response input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .add-response input:focus {
+            border-color: #667eea;
+        }
+
+        .add-response button {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 2em;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+            z-index: 100;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .modal input, .modal textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .modal textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .modal input:focus, .modal textarea:focus {
+            border-color: #667eea;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .modal-btn.primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .modal-btn.primary:hover {
+            background: #5a6fd8;
+        }
+
+        .modal-btn.secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .modal-btn.secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .insight-modal .modal-content {
+            max-width: 600px;
+        }
+
+        .top-response-insight {
+            background: linear-gradient(135deg, #fff9e6, #fff);
+            border: 2px solid #feca57;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-modal {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .auth-modal h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 20px;
+            color: #e74c3c;
+            background: #ffeaea;
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #7f8c8d;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+                margin-bottom: 15px;
+            }
+            
+            .auth-buttons {
+                position: static;
+                justify-content: center;
+                margin-top: 10px;
+            }
+            
+            .search-bar {
+                margin: 15px;
+            }
+            
+            .search-bar input {
+                min-width: 100%;
+            }
+            
+            .thoughts-list {
+                padding: 0 15px 15px;
+            }
+            
+            .thought-card {
+                padding: 15px;
+            }
+            
+            /* KEEP TOP RESPONSES SIDE BY SIDE ON MOBILE */
+            .top-responses {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            
+            .response-card {
+                padding: 12px;
+                min-height: 140px;
+            }
+            
+            .response-content {
+                font-size: 0.9em;
+                line-height: 1.4;
+            }
+            
+            .response-footer {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 8px;
+            }
+            
+            .total-score {
+                font-size: 1em;
+                padding: 3px 10px;
+            }
+            
+            .view-insight-btn {
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+            
+            /* Hide scoring system in top responses on mobile */
+            .top-responses .scoring-dropdown {
+                display: none;
+            }
+            
+            .other-response .scoring-dropdown {
+                display: flex;
+            }
+            
+            .add-response {
+                flex-direction: column;
+            }
+            
+            .add-response input {
+                min-width: 100%;
+            }
+            
+            .modal-content {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .floating-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+        }
+
+        /* For very small mobile devices */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                border-radius: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            /* KEEP TOP RESPONSES SIDE BY SIDE ON VERY SMALL SCREENS */
+            .top-responses {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            
+            .response-card {
+                padding: 10px;
+                min-height: 130px;
+            }
+            
+            .response-content {
+                font-size: 0.85em;
+            }
+            
+            .total-score {
+                font-size: 0.9em;
+                padding: 2px 8px;
+            }
+            
+            .view-insight-btn {
+                padding: 5px 10px;
+                font-size: 0.75em;
+            }
+            
+            .auth-modal {
+                padding: 30px 20px;
+            }
+            
+            .modal-buttons {
+                flex-direction: column;
+            }
+            
+            .modal-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>WhatIfVerse</h1>
+            <p>Share your hypothetical thoughts and explore others' imaginations</p>
+            
+            <div class="auth-buttons" id="authButtons">
+                <!-- Login button shows when user is not logged in -->
+                <button class="login-btn" id="loginBtn" onclick="showAuthModal()" style="display: none;">Login</button>
+                
+                <!-- User info shows when user is logged in -->
+                <div class="user-info" id="userInfo" style="display: none;">
+                    <span class="user-badge">Hello, <span id="currentUserNickname"></span>!</span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search by friend's nickname...">
+            <button onclick="searchThoughts()">Search</button>
+            <button class="secondary" onclick="loadThoughts()">Show All</button>
+        </div>
+
+        <div class="thoughts-list" id="thoughtsList">
+            <div class="loading">Loading thoughts...</div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button for Creating Thoughts -->
+    <button class="floating-btn" onclick="handleCreateThought()">+</button>
+
+    <!-- Modals -->
+    <div class="modal" id="thoughtModal">
+        <div class="modal-content">
+            <h2>Share Your WhatIf Thought</h2>
+            <textarea id="thoughtContent" placeholder="What if..."></textarea>
+            <div class="modal-buttons">
+                <button class="modal-btn secondary" onclick="hideThoughtModal()">Cancel</button>
+                <button class="modal-btn primary" onclick="createThought()">Share Thought</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal insight-modal" id="insightModal">
+        <div class="modal-content">
+            <h2>Top Response Insight</h2>
+            <div id="insightContent">
+                <!-- Insight content will be loaded here -->
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" onclick="hideInsightModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-modal">
+            <h2>Join WhatIfVerse</h2>
+            <p>To share thoughts and interact with the community, create your unique nickname.</p>
+            <p style="font-size: 0.9em; color: #7f8c8d; margin-bottom: 20px;">Your nickname will be active for 30 days</p>
+            <input type="text" id="nicknameInput" placeholder="Enter your creative nickname" style="width: 100%; padding: 12px; margin: 20px 0; border: 2px solid #e0e0e0; border-radius: 8px;">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="modal-btn secondary" onclick="hideAuthModal()" style="flex: 1;">Cancel</button>
+                <button class="modal-btn primary" onclick="registerUser()" style="flex: 1;">Join Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        let currentUser = null;
+        let currentToken = null;
+
+        // Check for existing session on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedToken = localStorage.getItem('whatif_token');
+            const savedUser = localStorage.getItem('whatif_user');
+            const expiry = localStorage.getItem('whatif_expiry');
+            
+            if (savedToken && savedUser && expiry && new Date(expiry) > new Date()) {
+                currentToken = savedToken;
+                currentUser = savedUser;
+            }
+            updateUserInterface();
+            loadThoughts();
+        });
+
+        // Update UI based on authentication state
+        function updateUserInterface() {
+            const loginBtn = document.getElementById('loginBtn');
+            const userInfo = document.getElementById('userInfo');
+            const currentUserNickname = document.getElementById('currentUserNickname');
+            
+            if (currentUser) {
+                loginBtn.style.display = 'none';
+                userInfo.style.display = 'flex';
+                currentUserNickname.textContent = currentUser;
+            } else {
+                loginBtn.style.display = 'block';
+                userInfo.style.display = 'none';
+            }
+        }
+
+        // Handle thought creation with auth check
+        function handleCreateThought() {
+            if (!currentToken) {
+                showAuthModal();
+                return;
+            }
+            showThoughtModal();
+        }
+
+        // Authentication functions
+        function showAuthModal() {
+            document.getElementById('authOverlay').style.display = 'flex';
+        }
+
+        function hideAuthModal() {
+            document.getElementById('authOverlay').style.display = 'none';
+            document.getElementById('nicknameInput').value = '';
+        }
+
+        async function registerUser() {
+            const nickname = document.getElementById('nicknameInput').value.trim();
+            if (!nickname) {
+                alert('Please enter a nickname');
+                return;
+            }
+
+            if (nickname.length < 2) {
+                alert('Nickname must be at least 2 characters long');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ nickname })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    currentToken = data.token;
+                    currentUser = nickname;
+                    
+                    // Save to localStorage
+                    localStorage.setItem('whatif_token', data.token);
+                    localStorage.setItem('whatif_user', nickname);
+                    localStorage.setItem('whatif_expiry', data.expires_at);
+                    
+                    hideAuthModal();
+                    updateUserInterface();
+                    loadThoughts();
+                    
+                    // Show success message and prompt for thought creation
+                    setTimeout(() => {
+                        if (confirm('Welcome to WhatIfVerse! 🎉 Would you like to share your first thought?')) {
+                            showThoughtModal();
+                        }
+                    }, 500);
+                } else {
+                    const error = await response.json();
+                    // FIXED: If nickname exists, backend now creates new session instead of error
+                    alert('Error: ' + error.detail);
+                }
+            } catch (error) {
+                alert('Error registering user. Please make sure the backend server is running.');
+            }
+        }
+
+        function logout() {
+            currentToken = null;
+            currentUser = null;
+            localStorage.removeItem('whatif_token');
+            localStorage.removeItem('whatif_user');
+            localStorage.removeItem('whatif_expiry');
+            updateUserInterface();
+            loadThoughts();
+        }
+
+        // API call wrapper with auth check
+        async function makeAuthenticatedRequest(url, options = {}) {
+            if (!currentToken) {
+                showAuthModal();
+                throw new Error('Authentication required');
+            }
+
+            const defaultOptions = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': currentToken,
+                    ...options.headers
+                }
+            };
+
+            const finalOptions = { ...defaultOptions, ...options };
+            
+            const response = await fetch(url, finalOptions);
+            if (response.status === 401) {
+                // Token expired
+                localStorage.removeItem('whatif_token');
+                localStorage.removeItem('whatif_user');
+                localStorage.removeItem('whatif_expiry');
+                currentToken = null;
+                currentUser = null;
+                updateUserInterface();
+                showAuthModal();
+                throw new Error('Session expired. Please login again.');
+            }
+            return response;
+        }
+
+        // Thought management
+        async function loadThoughts() {
+            try {
+                const response = await fetch(`${API_BASE}/thoughts`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const thoughts = await response.json();
+                displayThoughts(thoughts);
+            } catch (error) {
+                console.error('Error loading thoughts:', error);
+                document.getElementById('thoughtsList').innerHTML = 
+                    '<div class="error">Error loading thoughts. Please check if the backend server is running on port 8000.</div>';
+            }
+        }
+
+        function displayThoughts(thoughts) {
+            const container = document.getElementById('thoughtsList');
+            
+            if (thoughts.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No thoughts yet</h3>
+                        <p>Be the first to share a WhatIf thought!</p>
+                        ${!currentUser ? '<p><em>Create an account to start sharing</em></p>' : ''}
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = thoughts.map(thought => `
+                <div class="thought-card">
+                    <div class="thought-header">
+                        <div class="nickname-badge">${thought.user_nickname}</div>
+                    </div>
+                    <div class="whatif-thought">${thought.content}</div>
+                    
+                    <div class="responses-section">
+                        <h3>Top Responses:</h3>
+                        <div class="top-responses">
+                            ${(thought.top_responses || []).slice(0, 2).map((response, index) => `
+                                <div class="response-card top-${index + 1}">
+                                    <div class="rank-badge rank-${index + 1}">${index + 1}</div>
+                                    <div class="response-content">${response.content}</div>
+                                    <div class="response-footer">
+                                        <div class="total-score">Score: ${response.total_score || 0}</div>
+                                        ${index === 0 ? `<button class="view-insight-btn" onclick="showInsight('${response._id}')">View Insight</button>` : ''}
+                                    </div>
+                                    <!-- Scoring dropdown (hidden on mobile for top responses) -->
+                                    <div class="scoring-dropdown">
+                                        <select class="score-select" id="score-${response._id}">
+                                            <option value="">Rate this</option>
+                                            ${generateScoreOptions()}
+                                        </select>
+                                        <button class="apply-score-btn" onclick="rateResponse('${response._id}')">Apply</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                            ${(thought.top_responses || []).length === 0 ? '<p>No responses yet. Be the first to respond!</p>' : ''}
+                        </div>
+
+                        ${(thought.other_responses || []).length > 0 ? `
+                            <div class="other-responses">
+                                <h4>Other Responses:</h4>
+                                ${thought.other_responses.map(response => `
+                                    <div class="other-response">
+                                        <div class="response-content">${response.content}</div>
+                                        <div class="response-footer">
+                                            <div class="total-score">Score: ${response.total_score || 0}</div>
+                                        </div>
+                                        <!-- Scoring dropdown for other responses -->
+                                        <div class="scoring-dropdown">
+                                            <select class="score-select" id="score-${response._id}">
+                                                <option value="">Rate this</option>
+                                                ${generateScoreOptions()}
+                                            </select>
+                                            <button class="apply-score-btn" onclick="rateResponse('${response._id}')">Apply</button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                                ${thought.total_responses > 7 ? `<p>... and ${thought.total_responses - 7} more responses</p>` : ''}
+                            </div>
+                        ` : ''}
+
+                        <div class="add-response">
+                            <input type="text" id="response-${thought._id}" placeholder="Add your response..." onkeypress="if(event.key === 'Enter') createResponse('${thought._id}')">
+                            <button onclick="createResponse('${thought._id}')">Respond</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function generateScoreOptions() {
+            const options = [];
+            for (let i = -5; i <= 10; i++) {
+                const sign = i > 0 ? '+' : '';
+                options.push(`<option value="${i}">${sign}${i}</option>`);
+            }
+            return options.join('');
+        }
+
+        // Modal functions
+        function showThoughtModal() {
+            document.getElementById('thoughtModal').style.display = 'flex';
+        }
+
+        function hideThoughtModal() {
+            document.getElementById('thoughtModal').style.display = 'none';
+            document.getElementById('thoughtContent').value = '';
+        }
+
+        function showInsight(responseId) {
+            document.getElementById('insightContent').innerHTML = `
+                <div class="top-response-insight">
+                    <h3>🌟 Top Ranked Response Insight</h3>
+                    <p>This response received the highest score from the community because it was the most engaging, creative, and thought-provoking.</p>
+                    <p><strong>Why it works:</strong></p>
+                    <ul>
+                        <li>Creative thinking outside the box</li>
+                        <li>Clear and engaging presentation</li>
+                        <li>Positive community reception</li>
+                    </ul>
+                </div>
+            `;
+            document.getElementById('insightModal').style.display = 'flex';
+        }
+
+        function hideInsightModal() {
+            document.getElementById('insightModal').style.display = 'none';
+        }
+
+        // API interaction functions
+        async function createThought() {
+            const content = document.getElementById('thoughtContent').value.trim();
+            if (!content) {
+                alert('Please enter your thought');
+                return;
+            }
+
+            if (content.length < 10) {
+                alert('Thought should be at least 10 characters long');
+                return;
+            }
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/thoughts`, {
+                    method: 'POST',
+                    body: JSON.stringify({ content })
+                });
+
+                if (response.ok) {
+                    hideThoughtModal();
+                    loadThoughts();
+                    alert('Thought shared successfully! 🎉');
+                } else {
+                    const error = await response.json();
+                    alert(error.detail);
+                }
+            } catch (error) {
+                if (error.message !== 'Authentication required') {
+                    alert('Error creating thought: ' + error.message);
+                }
+            }
+        }
+
+        async function createResponse(thoughtId) {
+            const input = document.getElementById(`response-${thoughtId}`);
+            const content = input.value.trim();
+            
+            if (!content) {
+                alert('Please enter your response');
+                return;
+            }
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/responses`, {
+                    method: 'POST',
+                    body: JSON.stringify({ thought_id: thoughtId, content })
+                });
+
+                if (response.ok) {
+                    input.value = '';
+                    loadThoughts();
+                } else {
+                    const error = await response.json();
+                    alert(error.detail);
+                }
+            } catch (error) {
+                if (error.message !== 'Authentication required') {
+                    alert('Error creating response: ' + error.message);
+                }
+            }
+        }
+
+        async function rateResponse(responseId) {
+            const selectElement = document.getElementById(`score-${responseId}`);
+            const score = parseInt(selectElement.value);
+            
+            if (isNaN(score)) {
+                alert('Please select a score first');
+                return;
+            }
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/scores`, {
+                    method: 'POST',
+                    body: JSON.stringify({ response_id: responseId, score })
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    // Clear the selection
+                    selectElement.value = '';
+                    // Show success message
+                    alert(`Score applied successfully! New total: ${result.total_score}`);
+                    // Real-time update - reload thoughts to show updated scores and rankings
+                    loadThoughts();
+                } else {
+                    const error = await response.json();
+                    alert(error.detail);
+                }
+            } catch (error) {
+                // Authentication error is already handled by makeAuthenticatedRequest
+                if (error.message !== 'Authentication required') {
+                    console.error('Error rating response:', error);
+                    alert('Error applying score. Please try again.');
+                }
+            }
+        }
+
+        async function searchThoughts() {
+            const nickname = document.getElementById('searchInput').value.trim();
+            if (!nickname) {
+                loadThoughts();
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/search/${encodeURIComponent(nickname)}`);
+                if (response.ok) {
+                    const thoughts = await response.json();
+                    displayThoughts(thoughts);
+                    if (thoughts.length === 0) {
+                        document.getElementById('thoughtsList').innerHTML = `
+                            <div class="empty-state">
+                                <h3>No thoughts found</h3>
+                                <p>No thoughts found for user "${nickname}"</p>
+                                <button onclick="loadThoughts()" style="margin-top: 10px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 20px; cursor: pointer;">Show All Thoughts</button>
+                            </div>
+                        `;
+                    }
+                } else {
+                    alert('Error searching for user');
+                }
+            } catch (error) {
+                alert('Error searching: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
