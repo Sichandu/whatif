@@ -31,13 +31,23 @@
             background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
             padding: 20px;
-            text-align: center;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .header h1 {
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .logo {
             font-size: 2.5em;
-            margin-bottom: 10px;
             background: linear-gradient(45deg, #ff6b6b, #feca57);
             -webkit-background-clip: text;
             background-clip: text;
@@ -45,11 +55,72 @@
             color: transparent;
         }
 
-        .auth-buttons {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+        .header-text {
+            flex: 1;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .search-bar {
+            flex: 2;
+            max-width: 400px;
             display: flex;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .search-bar input:focus {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .search-bar button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .auth-section {
+            display: flex;
+            align-items: center;
             gap: 10px;
         }
 
@@ -83,49 +154,53 @@
             font-size: 0.9em;
         }
 
-        .search-bar {
-            display: flex;
-            gap: 10px;
-            margin: 20px;
-            flex-wrap: wrap;
+        /* Hamburger Menu */
+        .hamburger-menu {
+            display: none;
+            position: relative;
         }
 
-        .search-bar input {
-            flex: 1;
-            min-width: 200px;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 25px;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .search-bar input:focus {
-            border-color: #667eea;
-        }
-
-        .search-bar button {
-            padding: 12px 20px;
-            background: #667eea;
-            color: white;
+        .hamburger-btn {
+            background: none;
             border: none;
-            border-radius: 25px;
+            color: white;
+            font-size: 1.5em;
             cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            min-width: 200px;
+            z-index: 1000;
+            margin-top: 5px;
+        }
+
+        .hamburger-dropdown.show {
+            display: block;
+        }
+
+        .hamburger-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+            text-decoration: none;
+            display: block;
             transition: background 0.3s;
-            white-space: nowrap;
         }
 
-        .search-bar button:hover {
-            background: #5a6fd8;
+        .hamburger-item:hover {
+            background: #f8f9fa;
         }
 
-        .search-bar button.secondary {
-            background: #95a5a6;
-        }
-
-        .search-bar button.secondary:hover {
-            background: #7f8c8d;
+        .hamburger-item:last-child {
+            border-bottom: none;
         }
 
         .thoughts-list {
@@ -139,14 +214,21 @@
             margin-bottom: 20px;
             border-left: 5px solid #667eea;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
         }
 
         .thought-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 15px;
             flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .thought-user {
+            display: flex;
+            align-items: center;
             gap: 10px;
         }
 
@@ -157,6 +239,47 @@
             border-radius: 20px;
             font-weight: bold;
             font-size: 0.9em;
+        }
+
+        .thought-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.3s;
+        }
+
+        .edit-btn {
+            background: #feca57;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #f7b731;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+
+        .share-btn {
+            background: #27ae60;
+            color: white;
+        }
+
+        .share-btn:hover {
+            background: #219653;
         }
 
         .whatif-thought {
@@ -221,10 +344,49 @@
             background: #bdc3c7;
         }
 
+        .response-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .response-user {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .response-nickname {
+            background: #95a5a6;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .response-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .response-action-btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.7em;
+            transition: all 0.3s;
+        }
+
         .response-content {
             margin: 10px 0;
             color: #34495e;
             word-wrap: break-word;
+            line-height: 1.4;
         }
 
         .response-footer {
@@ -513,94 +675,144 @@
             color: #2c3e50;
         }
 
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 2000;
+            display: none;
+        }
+
+        .toast.show {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateX(-50%) translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             .header {
                 padding: 15px;
+                flex-direction: column;
+                align-items: stretch;
             }
-            
-            .header h1 {
+
+            .header-content {
+                justify-content: space-between;
+            }
+
+            .logo {
                 font-size: 2em;
-                margin-bottom: 15px;
             }
-            
-            .auth-buttons {
-                position: static;
-                justify-content: center;
-                margin-top: 10px;
+
+            .header h1 {
+                font-size: 1.6em;
             }
-            
+
             .search-bar {
-                margin: 15px;
+                max-width: none;
+                order: 3;
+                margin-top: 15px;
             }
-            
-            .search-bar input {
-                min-width: 100%;
+
+            .auth-section {
+                display: none;
             }
-            
+
+            .hamburger-menu {
+                display: block;
+            }
+
             .thoughts-list {
                 padding: 0 15px 15px;
             }
-            
+
             .thought-card {
                 padding: 15px;
             }
-            
+
             /* KEEP TOP RESPONSES SIDE BY SIDE ON MOBILE */
             .top-responses {
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
             }
-            
+
             .response-card {
                 padding: 12px;
                 min-height: 140px;
             }
-            
+
             .response-content {
                 font-size: 0.9em;
                 line-height: 1.4;
             }
-            
+
             .response-footer {
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
                 margin-top: 8px;
             }
-            
+
             .total-score {
                 font-size: 1em;
                 padding: 3px 10px;
             }
-            
+
             .view-insight-btn {
                 padding: 6px 12px;
                 font-size: 0.8em;
             }
-            
-            /* Hide scoring system in top responses on mobile */
-            .top-responses .scoring-dropdown {
-                display: none;
+
+            /* FIXED: Show scoring dropdown on mobile */
+            .scoring-dropdown {
+                display: flex !important;
+                flex-direction: row;
+                align-items: center;
+                margin-top: 8px;
             }
-            
-            .other-response .scoring-dropdown {
-                display: flex;
+
+            .score-select {
+                min-width: 70px;
+                font-size: 13px;
+                padding: 6px 8px;
             }
-            
+
+            .apply-score-btn {
+                padding: 6px 10px;
+                font-size: 13px;
+            }
+
             .add-response {
                 flex-direction: column;
             }
-            
+
             .add-response input {
                 min-width: 100%;
             }
-            
+
             .modal-content {
                 padding: 20px;
                 margin: 10px;
             }
-            
+
             .floating-btn {
                 bottom: 20px;
                 right: 20px;
@@ -615,50 +827,60 @@
             body {
                 padding: 10px;
             }
-            
+
             .container {
                 border-radius: 10px;
             }
-            
+
             .header h1 {
-                font-size: 1.8em;
+                font-size: 1.4em;
             }
-            
+
             /* KEEP TOP RESPONSES SIDE BY SIDE ON VERY SMALL SCREENS */
             .top-responses {
                 grid-template-columns: 1fr 1fr;
                 gap: 8px;
             }
-            
+
             .response-card {
                 padding: 10px;
                 min-height: 130px;
             }
-            
+
             .response-content {
                 font-size: 0.85em;
             }
-            
+
             .total-score {
                 font-size: 0.9em;
                 padding: 2px 8px;
             }
-            
+
             .view-insight-btn {
                 padding: 5px 10px;
                 font-size: 0.75em;
             }
-            
+
             .auth-modal {
                 padding: 30px 20px;
             }
-            
+
             .modal-buttons {
                 flex-direction: column;
             }
-            
+
             .modal-btn {
                 width: 100%;
+            }
+
+            /* Adjust action buttons for very small screens */
+            .thought-actions {
+                flex-wrap: wrap;
+            }
+
+            .action-btn {
+                font-size: 0.7em;
+                padding: 4px 8px;
             }
         }
     </style>
@@ -666,10 +888,34 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>WhatIfVerse</h1>
-            <p>Share your hypothetical thoughts and explore others' imaginations</p>
-            
-            <div class="auth-buttons" id="authButtons">
+            <div class="header-content">
+                <div class="logo">🤔</div>
+                <div class="header-text">
+                    <h1>WhatIfVerse</h1>
+                    <p>Share your hypothetical thoughts and explore others' imaginations</p>
+                </div>
+                
+                <!-- Hamburger menu for mobile -->
+                <div class="hamburger-menu">
+                    <button class="hamburger-btn">☰</button>
+                    <div class="hamburger-dropdown" id="hamburgerDropdown">
+                        <div class="hamburger-item" id="mobileUserInfo" style="display: none;">
+                            <strong>Hello, <span id="mobileUserNickname"></span>!</strong>
+                        </div>
+                        <a href="#" class="hamburger-item" onclick="handleCreateThought()">Create Thought</a>
+                        <a href="#" class="hamburger-item" onclick="loadThoughts()">Show All</a>
+                        <a href="#" class="hamburger-item" id="mobileLoginBtn" onclick="showAuthModal()" style="display: none;">Login</a>
+                        <a href="#" class="hamburger-item" id="mobileLogoutBtn" onclick="logout()" style="display: none;">Logout</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search by friend's nickname...">
+                <button onclick="searchThoughts()">Search</button>
+            </div>
+
+            <div class="auth-section" id="authButtons">
                 <!-- Login button shows when user is not logged in -->
                 <button class="login-btn" id="loginBtn" onclick="showAuthModal()" style="display: none;">Login</button>
                 
@@ -681,12 +927,6 @@
             </div>
         </div>
 
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search by friend's nickname...">
-            <button onclick="searchThoughts()">Search</button>
-            <button class="secondary" onclick="loadThoughts()">Show All</button>
-        </div>
-
         <div class="thoughts-list" id="thoughtsList">
             <div class="loading">Loading thoughts...</div>
         </div>
@@ -694,6 +934,9 @@
 
     <!-- Floating Action Button for Creating Thoughts -->
     <button class="floating-btn" onclick="handleCreateThought()">+</button>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
 
     <!-- Modals -->
     <div class="modal" id="thoughtModal">
@@ -703,6 +946,28 @@
             <div class="modal-buttons">
                 <button class="modal-btn secondary" onclick="hideThoughtModal()">Cancel</button>
                 <button class="modal-btn primary" onclick="createThought()">Share Thought</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="editThoughtModal">
+        <div class="modal-content">
+            <h2>Edit Your Thought</h2>
+            <textarea id="editThoughtContent" placeholder="Edit your thought..."></textarea>
+            <div class="modal-buttons">
+                <button class="modal-btn secondary" onclick="hideEditThoughtModal()">Cancel</button>
+                <button class="modal-btn primary" onclick="updateThought()">Update Thought</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="editResponseModal">
+        <div class="modal-content">
+            <h2>Edit Your Response</h2>
+            <textarea id="editResponseContent" placeholder="Edit your response..."></textarea>
+            <div class="modal-buttons">
+                <button class="modal-btn secondary" onclick="hideEditResponseModal()">Cancel</button>
+                <button class="modal-btn primary" onclick="updateResponse()">Update Response</button>
             </div>
         </div>
     </div>
@@ -733,9 +998,12 @@
     </div>
 
     <script>
-        const API_BASE = 'https://whatifback-1.onrender.com';
+        const API_BASE = 'http://localhost:8000';
         let currentUser = null;
         let currentToken = null;
+        let pendingResponse = null; // Store pending response when user needs to login first
+        let editingThoughtId = null;
+        let editingResponseId = null;
 
         // Check for existing session on page load
         document.addEventListener('DOMContentLoaded', function() {
@@ -749,6 +1017,17 @@
             }
             updateUserInterface();
             loadThoughts();
+
+            // Hamburger menu toggle
+            document.querySelector('.hamburger-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.getElementById('hamburgerDropdown').classList.toggle('show');
+            });
+
+            // Close hamburger menu when clicking outside
+            document.addEventListener('click', function() {
+                document.getElementById('hamburgerDropdown').classList.remove('show');
+            });
         });
 
         // Update UI based on authentication state
@@ -756,14 +1035,27 @@
             const loginBtn = document.getElementById('loginBtn');
             const userInfo = document.getElementById('userInfo');
             const currentUserNickname = document.getElementById('currentUserNickname');
+            const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+            const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
+            const mobileUserInfo = document.getElementById('mobileUserInfo');
+            const mobileUserNickname = document.getElementById('mobileUserNickname');
             
             if (currentUser) {
                 loginBtn.style.display = 'none';
                 userInfo.style.display = 'flex';
                 currentUserNickname.textContent = currentUser;
+                
+                mobileLoginBtn.style.display = 'none';
+                mobileLogoutBtn.style.display = 'block';
+                mobileUserInfo.style.display = 'block';
+                mobileUserNickname.textContent = currentUser;
             } else {
                 loginBtn.style.display = 'block';
                 userInfo.style.display = 'none';
+                
+                mobileLoginBtn.style.display = 'block';
+                mobileLogoutBtn.style.display = 'none';
+                mobileUserInfo.style.display = 'none';
             }
         }
 
@@ -786,6 +1078,7 @@
             document.getElementById('nicknameInput').value = '';
         }
 
+        // FIXED: Auto-post after registration
         async function registerUser() {
             const nickname = document.getElementById('nicknameInput').value.trim();
             if (!nickname) {
@@ -819,21 +1112,50 @@
                     
                     hideAuthModal();
                     updateUserInterface();
+                    
+                    // FIXED: If there was a pending response, post it NOW before loading thoughts
+                    if (pendingResponse) {
+                        console.log('Auto-posting pending response:', pendingResponse);
+                        await createResponseDirectly(pendingResponse.thoughtId, pendingResponse.content);
+                        pendingResponse = null;
+                    }
+                    
                     loadThoughts();
                     
-                    // Show success message and prompt for thought creation
-                    setTimeout(() => {
-                        if (confirm('Welcome to WhatIfVerse! 🎉 Would you like to share your first thought?')) {
-                            showThoughtModal();
-                        }
-                    }, 500);
+                    // Show success message
+                    showToast('Welcome to WhatIfVerse! 🎉');
                 } else {
                     const error = await response.json();
-                    // FIXED: If nickname exists, backend now creates new session instead of error
                     alert('Error: ' + error.detail);
                 }
             } catch (error) {
                 alert('Error registering user. Please make sure the backend server is running.');
+            }
+        }
+
+        // NEW: Direct response creation without input field dependency
+        async function createResponseDirectly(thoughtId, content) {
+            if (!content.trim()) {
+                return;
+            }
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/responses`, {
+                    method: 'POST',
+                    body: JSON.stringify({ thought_id: thoughtId, content: content })
+                });
+
+                if (response.ok) {
+                    showToast('Response posted successfully!');
+                    return true;
+                } else {
+                    const error = await response.json();
+                    console.error('Error creating response:', error);
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error creating response:', error);
+                return false;
             }
         }
 
@@ -845,6 +1167,7 @@
             localStorage.removeItem('whatif_expiry');
             updateUserInterface();
             loadThoughts();
+            showToast('Logged out successfully');
         }
 
         // API call wrapper with auth check
@@ -877,6 +1200,16 @@
                 throw new Error('Session expired. Please login again.');
             }
             return response;
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
 
         // Thought management
@@ -912,7 +1245,16 @@
             container.innerHTML = thoughts.map(thought => `
                 <div class="thought-card">
                     <div class="thought-header">
-                        <div class="nickname-badge">${thought.user_nickname}</div>
+                        <div class="thought-user">
+                            <div class="nickname-badge">${thought.user_nickname}</div>
+                        </div>
+                        <div class="thought-actions">
+                            ${currentUser === thought.user_nickname ? `
+                                <button class="action-btn edit-btn" onclick="editThought('${thought._id}', '${thought.content.replace(/'/g, "\\'")}')">Edit</button>
+                                <button class="action-btn delete-btn" onclick="deleteThought('${thought._id}')">Delete</button>
+                            ` : ''}
+                            <button class="action-btn share-btn" onclick="shareThought('${thought._id}')">Share</button>
+                        </div>
                     </div>
                     <div class="whatif-thought">${thought.content}</div>
                     
@@ -922,12 +1264,23 @@
                             ${(thought.top_responses || []).slice(0, 2).map((response, index) => `
                                 <div class="response-card top-${index + 1}">
                                     <div class="rank-badge rank-${index + 1}">${index + 1}</div>
+                                    <div class="response-header">
+                                        <div class="response-user">
+                                            <div class="response-nickname">${response.user_nickname || 'Anonymous'}</div>
+                                        </div>
+                                        <div class="response-actions">
+                                            ${currentUser === response.user_nickname ? `
+                                                <button class="response-action-btn edit-btn" onclick="editResponse('${response._id}', '${response.content.replace(/'/g, "\\'")}')">Edit</button>
+                                                <button class="response-action-btn delete-btn" onclick="deleteResponse('${response._id}')">Delete</button>
+                                            ` : ''}
+                                        </div>
+                                    </div>
                                     <div class="response-content">${response.content}</div>
                                     <div class="response-footer">
                                         <div class="total-score">Score: ${response.total_score || 0}</div>
                                         ${index === 0 ? `<button class="view-insight-btn" onclick="showInsight('${response._id}')">View Insight</button>` : ''}
                                     </div>
-                                    <!-- Scoring dropdown (hidden on mobile for top responses) -->
+                                    <!-- Scoring dropdown -->
                                     <div class="scoring-dropdown">
                                         <select class="score-select" id="score-${response._id}">
                                             <option value="">Rate this</option>
@@ -945,6 +1298,17 @@
                                 <h4>Other Responses:</h4>
                                 ${thought.other_responses.map(response => `
                                     <div class="other-response">
+                                        <div class="response-header">
+                                            <div class="response-user">
+                                                <div class="response-nickname">${response.user_nickname || 'Anonymous'}</div>
+                                            </div>
+                                            <div class="response-actions">
+                                                ${currentUser === response.user_nickname ? `
+                                                    <button class="response-action-btn edit-btn" onclick="editResponse('${response._id}', '${response.content.replace(/'/g, "\\'")}')">Edit</button>
+                                                    <button class="response-action-btn delete-btn" onclick="deleteResponse('${response._id}')">Delete</button>
+                                                ` : ''}
+                                            </div>
+                                        </div>
                                         <div class="response-content">${response.content}</div>
                                         <div class="response-footer">
                                             <div class="total-score">Score: ${response.total_score || 0}</div>
@@ -1034,6 +1398,26 @@
             document.getElementById('thoughtContent').value = '';
         }
 
+        function showEditThoughtModal() {
+            document.getElementById('editThoughtModal').style.display = 'flex';
+        }
+
+        function hideEditThoughtModal() {
+            document.getElementById('editThoughtModal').style.display = 'none';
+            document.getElementById('editThoughtContent').value = '';
+            editingThoughtId = null;
+        }
+
+        function showEditResponseModal() {
+            document.getElementById('editResponseModal').style.display = 'flex';
+        }
+
+        function hideEditResponseModal() {
+            document.getElementById('editResponseModal').style.display = 'none';
+            document.getElementById('editResponseContent').value = '';
+            editingResponseId = null;
+        }
+
         function showInsight(responseId) {
             document.getElementById('insightContent').innerHTML = `
                 <div class="top-response-insight">
@@ -1076,7 +1460,7 @@
                 if (response.ok) {
                     hideThoughtModal();
                     loadThoughts();
-                    alert('Thought shared successfully! 🎉');
+                    showToast('Thought shared successfully! 🎉');
                 } else {
                     const error = await response.json();
                     alert(error.detail);
@@ -1088,6 +1472,7 @@
             }
         }
 
+        // FIXED: Response creation with pending response handling
         async function createResponse(thoughtId) {
             const input = document.getElementById(`response-${thoughtId}`);
             const content = input.value.trim();
@@ -1097,15 +1482,27 @@
                 return;
             }
 
+            // If user is not logged in, store the response and show auth modal
+            if (!currentToken) {
+                pendingResponse = {
+                    thoughtId: thoughtId,
+                    content: content
+                };
+                input.value = ''; // Clear the input
+                showAuthModal();
+                return;
+            }
+
             try {
                 const response = await makeAuthenticatedRequest(`${API_BASE}/responses`, {
                     method: 'POST',
-                    body: JSON.stringify({ thought_id: thoughtId, content })
+                    body: JSON.stringify({ thought_id: thoughtId, content: content })
                 });
 
                 if (response.ok) {
                     input.value = '';
                     loadThoughts();
+                    showToast('Response posted successfully!');
                 } else {
                     const error = await response.json();
                     alert(error.detail);
@@ -1115,6 +1512,137 @@
                     alert('Error creating response: ' + error.message);
                 }
             }
+        }
+
+        // FIXED: Thought editing
+        function editThought(thoughtId, content) {
+            editingThoughtId = thoughtId;
+            document.getElementById('editThoughtContent').value = content;
+            showEditThoughtModal();
+        }
+
+        // FIXED: Thought editing
+        async function updateThought() {
+            const content = document.getElementById('editThoughtContent').value.trim();
+            if (!content) {
+                alert('Please enter your thought');
+                return;
+            }
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/thoughts/${editingThoughtId}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ content: content })
+                });
+
+                if (response.ok) {
+                    hideEditThoughtModal();
+                    loadThoughts();
+                    showToast('Thought updated successfully!');
+                } else {
+                    const error = await response.json();
+                    alert('Error: ' + error.detail);
+                }
+            } catch (error) {
+                alert('Error updating thought: ' + error.message);
+            }
+        }
+
+        // FIXED: Thought deletion
+        async function deleteThought(thoughtId) {
+            if (!confirm('Are you sure you want to delete this thought? All responses will also be deleted.')) {
+                return;
+            }
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/thoughts/${thoughtId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    loadThoughts();
+                    showToast('Thought deleted successfully');
+                } else {
+                    const error = await response.json();
+                    alert('Error: ' + error.detail);
+                }
+            } catch (error) {
+                alert('Error deleting thought: ' + error.message);
+            }
+        }
+
+        // FIXED: Response editing
+        function editResponse(responseId, content) {
+            editingResponseId = responseId;
+            document.getElementById('editResponseContent').value = content;
+            showEditResponseModal();
+        }
+
+        // FIXED: Response editing
+        async function updateResponse() {
+            const content = document.getElementById('editResponseContent').value.trim();
+            if (!content) {
+                alert('Please enter your response');
+                return;
+            }
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/responses/${editingResponseId}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ content: content })
+                });
+
+                if (response.ok) {
+                    hideEditResponseModal();
+                    loadThoughts();
+                    showToast('Response updated successfully!');
+                } else {
+                    const error = await response.json();
+                    alert('Error: ' + error.detail);
+                }
+            } catch (error) {
+                alert('Error updating response: ' + error.message);
+            }
+        }
+
+        // FIXED: Response deletion
+        async function deleteResponse(responseId) {
+            if (!confirm('Are you sure you want to delete this response?')) {
+                return;
+            }
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/responses/${responseId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    loadThoughts();
+                    showToast('Response deleted successfully');
+                } else {
+                    const error = await response.json();
+                    alert('Error: ' + error.detail);
+                }
+            } catch (error) {
+                alert('Error deleting response: ' + error.message);
+            }
+        }
+
+        // Share functionality
+        function shareThought(thoughtId) {
+            const url = `${window.location.origin}${window.location.pathname}?thought=${thoughtId}`;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('Thought link copied to clipboard! 📋');
+            }).catch(() => {
+                // Fallback for older browsers
+                const tempInput = document.createElement('input');
+                tempInput.value = url;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                showToast('Thought link copied to clipboard! 📋');
+            });
         }
 
         async function searchThoughts() {
