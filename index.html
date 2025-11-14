@@ -246,36 +246,15 @@
             gap: 8px;
         }
 
-        .action-btn {
+        .share-btn {
+            background: #27ae60;
+            color: white;
             padding: 6px 12px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.8em;
             transition: all 0.3s;
-        }
-
-        .edit-btn {
-            background: #feca57;
-            color: white;
-        }
-
-        .edit-btn:hover {
-            background: #f7b731;
-        }
-
-        .delete-btn {
-            background: #e74c3c;
-            color: white;
-        }
-
-        .delete-btn:hover {
-            background: #c0392b;
-        }
-
-        .share-btn {
-            background: #27ae60;
-            color: white;
         }
 
         .share-btn:hover {
@@ -368,20 +347,6 @@
             font-weight: bold;
         }
 
-        .response-actions {
-            display: flex;
-            gap: 5px;
-        }
-
-        .response-action-btn {
-            padding: 4px 8px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.7em;
-            transition: all 0.3s;
-        }
-
         .response-content {
             margin: 10px 0;
             color: #34495e;
@@ -398,12 +363,41 @@
             gap: 10px;
         }
 
-        .total-score {
+        .like-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .like-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .like-btn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        .like-btn.liked {
+            background: #27ae60;
+        }
+
+        .like-count {
             font-weight: bold;
-            font-size: 1.1em;
+            font-size: 1em;
             color: #2c3e50;
             background: #f8f9fa;
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 15px;
             border: 1px solid #e0e0e0;
         }
@@ -422,44 +416,6 @@
 
         .view-insight-btn:hover {
             background: #5a6fd8;
-        }
-
-        .scoring-dropdown {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .score-select {
-            padding: 8px 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            background: white;
-            font-size: 14px;
-            cursor: pointer;
-            outline: none;
-            transition: border-color 0.3s;
-            min-width: 80px;
-        }
-
-        .score-select:focus {
-            border-color: #667eea;
-        }
-
-        .apply-score-btn {
-            padding: 8px 12px;
-            background: #27ae60;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s;
-        }
-
-        .apply-score-btn:hover {
-            background: #219653;
         }
 
         .other-responses {
@@ -556,7 +512,7 @@
             color: #2c3e50;
         }
 
-        .modal input, .modal textarea {
+        .modal textarea {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
@@ -564,14 +520,11 @@
             border-radius: 8px;
             font-size: 16px;
             outline: none;
-        }
-
-        .modal textarea {
             height: 120px;
             resize: vertical;
         }
 
-        .modal input:focus, .modal textarea:focus {
+        .modal textarea:focus {
             border-color: #667eea;
         }
 
@@ -748,7 +701,6 @@
                 padding: 15px;
             }
 
-            /* KEEP TOP RESPONSES SIDE BY SIDE ON MOBILE */
             .top-responses {
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
@@ -771,7 +723,7 @@
                 margin-top: 8px;
             }
 
-            .total-score {
+            .like-count {
                 font-size: 1em;
                 padding: 3px 10px;
             }
@@ -779,25 +731,6 @@
             .view-insight-btn {
                 padding: 6px 12px;
                 font-size: 0.8em;
-            }
-
-            /* FIXED: Show scoring dropdown on mobile */
-            .scoring-dropdown {
-                display: flex !important;
-                flex-direction: row;
-                align-items: center;
-                margin-top: 8px;
-            }
-
-            .score-select {
-                min-width: 70px;
-                font-size: 13px;
-                padding: 6px 8px;
-            }
-
-            .apply-score-btn {
-                padding: 6px 10px;
-                font-size: 13px;
             }
 
             .add-response {
@@ -822,7 +755,6 @@
             }
         }
 
-        /* For very small mobile devices */
         @media (max-width: 480px) {
             body {
                 padding: 10px;
@@ -836,7 +768,6 @@
                 font-size: 1.4em;
             }
 
-            /* KEEP TOP RESPONSES SIDE BY SIDE ON VERY SMALL SCREENS */
             .top-responses {
                 grid-template-columns: 1fr 1fr;
                 gap: 8px;
@@ -851,7 +782,7 @@
                 font-size: 0.85em;
             }
 
-            .total-score {
+            .like-count {
                 font-size: 0.9em;
                 padding: 2px 8px;
             }
@@ -871,16 +802,6 @@
 
             .modal-btn {
                 width: 100%;
-            }
-
-            /* Adjust action buttons for very small screens */
-            .thought-actions {
-                flex-wrap: wrap;
-            }
-
-            .action-btn {
-                font-size: 0.7em;
-                padding: 4px 8px;
             }
         }
     </style>
@@ -950,28 +871,6 @@
         </div>
     </div>
 
-    <div class="modal" id="editThoughtModal">
-        <div class="modal-content">
-            <h2>Edit Your Thought</h2>
-            <textarea id="editThoughtContent" placeholder="Edit your thought..."></textarea>
-            <div class="modal-buttons">
-                <button class="modal-btn secondary" onclick="hideEditThoughtModal()">Cancel</button>
-                <button class="modal-btn primary" onclick="updateThought()">Update Thought</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="editResponseModal">
-        <div class="modal-content">
-            <h2>Edit Your Response</h2>
-            <textarea id="editResponseContent" placeholder="Edit your response..."></textarea>
-            <div class="modal-buttons">
-                <button class="modal-btn secondary" onclick="hideEditResponseModal()">Cancel</button>
-                <button class="modal-btn primary" onclick="updateResponse()">Update Response</button>
-            </div>
-        </div>
-    </div>
-
     <div class="modal insight-modal" id="insightModal">
         <div class="modal-content">
             <h2>Top Response Insight</h2>
@@ -997,13 +896,12 @@
         </div>
     </div>
 
-    <script>
-        const API_BASE = 'https://whatifback-1.onrender.com';
+    <!-- <script>
+        // const API_BASE = 'https://whatifback-1.onrender.com';
+        const API_BASE = 'http://127.0.0.1:8000';
         let currentUser = null;
         let currentToken = null;
-        let pendingResponse = null; // Store pending response when user needs to login first
-        let editingThoughtId = null;
-        let editingResponseId = null;
+        let pendingResponse = null;
 
         // Check for existing session on page load
         document.addEventListener('DOMContentLoaded', function() {
@@ -1024,7 +922,6 @@
                 document.getElementById('hamburgerDropdown').classList.toggle('show');
             });
 
-            // Close hamburger menu when clicking outside
             document.addEventListener('click', function() {
                 document.getElementById('hamburgerDropdown').classList.remove('show');
             });
@@ -1078,7 +975,6 @@
             document.getElementById('nicknameInput').value = '';
         }
 
-        // FIXED: Auto-post after registration
         async function registerUser() {
             const nickname = document.getElementById('nicknameInput').value.trim();
             if (!nickname) {
@@ -1105,7 +1001,6 @@
                     currentToken = data.token;
                     currentUser = nickname;
                     
-                    // Save to localStorage
                     localStorage.setItem('whatif_token', data.token);
                     localStorage.setItem('whatif_user', nickname);
                     localStorage.setItem('whatif_expiry', data.expires_at);
@@ -1113,16 +1008,12 @@
                     hideAuthModal();
                     updateUserInterface();
                     
-                    // FIXED: If there was a pending response, post it NOW before loading thoughts
                     if (pendingResponse) {
-                        console.log('Auto-posting pending response:', pendingResponse);
                         await createResponseDirectly(pendingResponse.thoughtId, pendingResponse.content);
                         pendingResponse = null;
                     }
                     
                     loadThoughts();
-                    
-                    // Show success message
                     showToast('Welcome to WhatIfVerse! 🎉');
                 } else {
                     const error = await response.json();
@@ -1133,11 +1024,8 @@
             }
         }
 
-        // NEW: Direct response creation without input field dependency
         async function createResponseDirectly(thoughtId, content) {
-            if (!content.trim()) {
-                return;
-            }
+            if (!content.trim()) return;
 
             try {
                 const response = await makeAuthenticatedRequest(`${API_BASE}/responses`, {
@@ -1189,7 +1077,6 @@
             
             const response = await fetch(url, finalOptions);
             if (response.status === 401) {
-                // Token expired
                 localStorage.removeItem('whatif_token');
                 localStorage.removeItem('whatif_user');
                 localStorage.removeItem('whatif_expiry');
@@ -1216,15 +1103,13 @@
         async function loadThoughts() {
             try {
                 const response = await fetch(`${API_BASE}/thoughts`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const thoughts = await response.json();
                 displayThoughts(thoughts);
             } catch (error) {
                 console.error('Error loading thoughts:', error);
                 document.getElementById('thoughtsList').innerHTML = 
-                    '<div class="error">Error loading thoughts. Please check if the backend server is running on port 8000.</div>';
+                    '<div class="error">Error loading thoughts. Please check if the backend server is running.</div>';
             }
         }
 
@@ -1249,11 +1134,7 @@
                             <div class="nickname-badge">${thought.user_nickname}</div>
                         </div>
                         <div class="thought-actions">
-                            ${currentUser === thought.user_nickname ? `
-                                <button class="action-btn edit-btn" onclick="editThought('${thought._id}', '${thought.content.replace(/'/g, "\\'")}')">Edit</button>
-                                <button class="action-btn delete-btn" onclick="deleteThought('${thought._id}')">Delete</button>
-                            ` : ''}
-                            <button class="action-btn share-btn" onclick="shareThought('${thought._id}')">Share</button>
+                            <button class="share-btn" onclick="shareThought('${thought._id}')">Share</button>
                         </div>
                     </div>
                     <div class="whatif-thought">${thought.content}</div>
@@ -1268,25 +1149,17 @@
                                         <div class="response-user">
                                             <div class="response-nickname">${response.user_nickname || 'Anonymous'}</div>
                                         </div>
-                                        <div class="response-actions">
-                                            ${currentUser === response.user_nickname ? `
-                                                <button class="response-action-btn edit-btn" onclick="editResponse('${response._id}', '${response.content.replace(/'/g, "\\'")}')">Edit</button>
-                                                <button class="response-action-btn delete-btn" onclick="deleteResponse('${response._id}')">Delete</button>
-                                            ` : ''}
-                                        </div>
                                     </div>
                                     <div class="response-content">${response.content}</div>
                                     <div class="response-footer">
-                                        <div class="total-score">Score: ${response.total_score || 0}</div>
+                                        <div class="like-section">
+                                            <button class="like-btn ${response.user_liked ? 'liked' : ''}" 
+                                                    onclick="likeResponse('${response._id}')">
+                                                ${response.user_liked ? '❤️' : '🤍'} Like
+                                            </button>
+                                            <span class="like-count">${response.like_count || 0}</span>
+                                        </div>
                                         ${index === 0 ? `<button class="view-insight-btn" onclick="showInsight('${response._id}')">View Insight</button>` : ''}
-                                    </div>
-                                    <!-- Scoring dropdown -->
-                                    <div class="scoring-dropdown">
-                                        <select class="score-select" id="score-${response._id}">
-                                            <option value="">Rate this</option>
-                                            ${generateScoreOptions()}
-                                        </select>
-                                        <button class="apply-score-btn" onclick="rateResponse('${response._id}')">Apply</button>
                                     </div>
                                 </div>
                             `).join('')}
@@ -1302,24 +1175,16 @@
                                             <div class="response-user">
                                                 <div class="response-nickname">${response.user_nickname || 'Anonymous'}</div>
                                             </div>
-                                            <div class="response-actions">
-                                                ${currentUser === response.user_nickname ? `
-                                                    <button class="response-action-btn edit-btn" onclick="editResponse('${response._id}', '${response.content.replace(/'/g, "\\'")}')">Edit</button>
-                                                    <button class="response-action-btn delete-btn" onclick="deleteResponse('${response._id}')">Delete</button>
-                                                ` : ''}
-                                            </div>
                                         </div>
                                         <div class="response-content">${response.content}</div>
                                         <div class="response-footer">
-                                            <div class="total-score">Score: ${response.total_score || 0}</div>
-                                        </div>
-                                        <!-- Scoring dropdown for other responses -->
-                                        <div class="scoring-dropdown">
-                                            <select class="score-select" id="score-${response._id}">
-                                                <option value="">Rate this</option>
-                                                ${generateScoreOptions()}
-                                            </select>
-                                            <button class="apply-score-btn" onclick="rateResponse('${response._id}')">Apply</button>
+                                            <div class="like-section">
+                                                <button class="like-btn ${response.user_liked ? 'liked' : ''}" 
+                                                        onclick="likeResponse('${response._id}')">
+                                                    ${response.user_liked ? '❤️' : '🤍'} Like
+                                                </button>
+                                                <span class="like-count">${response.like_count || 0}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 `).join('')}
@@ -1336,54 +1201,23 @@
             `).join('');
         }
 
-        function generateScoreOptions() {
-            const options = [];
-            for (let i = -5; i <= 10; i++) {
-                const sign = i > 0 ? '+' : '';
-                options.push(`<option value="${i}">${sign}${i}</option>`);
-            }
-            return options.join('');
-        }
-
-        // FIXED: Proper changeable voting system
-        async function rateResponse(responseId) {
-            const selectElement = document.getElementById(`score-${responseId}`);
-            const score = parseInt(selectElement.value);
-            
-            if (isNaN(score)) {
-                alert('Please select a score first');
-                return;
-            }
-
-            console.log(`Rating response ${responseId} with score: ${score}`);
-
+        // Simple like functionality
+        async function likeResponse(responseId) {
             try {
-                const response = await makeAuthenticatedRequest(`${API_BASE}/scores`, {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/like`, {
                     method: 'POST',
-                    body: JSON.stringify({ response_id: responseId, score })
+                    body: JSON.stringify({ response_id: responseId })
                 });
 
                 if (response.ok) {
-                    const result = await response.json();
-                    console.log(`Server response:`, result);
-                    
-                    // Clear the selection
-                    selectElement.value = '';
-                    
-                    // Show detailed success message
-                    alert(result.message);
-                    
-                    // Real-time update
                     loadThoughts();
                 } else {
                     const error = await response.json();
-                    console.error('Server error:', error);
                     alert('Error: ' + error.detail);
                 }
             } catch (error) {
-                console.error('Rating error:', error);
                 if (error.message !== 'Authentication required') {
-                    alert('Error applying score: ' + error.message);
+                    alert('Error liking response: ' + error.message);
                 }
             }
         }
@@ -1398,31 +1232,11 @@
             document.getElementById('thoughtContent').value = '';
         }
 
-        function showEditThoughtModal() {
-            document.getElementById('editThoughtModal').style.display = 'flex';
-        }
-
-        function hideEditThoughtModal() {
-            document.getElementById('editThoughtModal').style.display = 'none';
-            document.getElementById('editThoughtContent').value = '';
-            editingThoughtId = null;
-        }
-
-        function showEditResponseModal() {
-            document.getElementById('editResponseModal').style.display = 'flex';
-        }
-
-        function hideEditResponseModal() {
-            document.getElementById('editResponseModal').style.display = 'none';
-            document.getElementById('editResponseContent').value = '';
-            editingResponseId = null;
-        }
-
         function showInsight(responseId) {
             document.getElementById('insightContent').innerHTML = `
                 <div class="top-response-insight">
                     <h3>🌟 Top Ranked Response Insight</h3>
-                    <p>This response received the highest score from the community because it was the most engaging, creative, and thought-provoking.</p>
+                    <p>This response received the most likes from the community because it was the most engaging, creative, and thought-provoking.</p>
                     <p><strong>Why it works:</strong></p>
                     <ul>
                         <li>Creative thinking outside the box</li>
@@ -1472,7 +1286,6 @@
             }
         }
 
-        // FIXED: Response creation with pending response handling
         async function createResponse(thoughtId) {
             const input = document.getElementById(`response-${thoughtId}`);
             const content = input.value.trim();
@@ -1482,13 +1295,9 @@
                 return;
             }
 
-            // If user is not logged in, store the response and show auth modal
             if (!currentToken) {
-                pendingResponse = {
-                    thoughtId: thoughtId,
-                    content: content
-                };
-                input.value = ''; // Clear the input
+                pendingResponse = { thoughtId: thoughtId, content: content };
+                input.value = '';
                 showAuthModal();
                 return;
             }
@@ -1514,127 +1323,482 @@
             }
         }
 
-        // FIXED: Thought editing
-        function editThought(thoughtId, content) {
-            editingThoughtId = thoughtId;
-            document.getElementById('editThoughtContent').value = content;
-            showEditThoughtModal();
-        }
-
-        // FIXED: Thought editing
-        async function updateThought() {
-            const content = document.getElementById('editThoughtContent').value.trim();
-            if (!content) {
-                alert('Please enter your thought');
-                return;
-            }
-
-            try {
-                const response = await makeAuthenticatedRequest(`${API_BASE}/thoughts/${editingThoughtId}`, {
-                    method: 'PUT',
-                    body: JSON.stringify({ content: content })
-                });
-
-                if (response.ok) {
-                    hideEditThoughtModal();
-                    loadThoughts();
-                    showToast('Thought updated successfully!');
-                } else {
-                    const error = await response.json();
-                    alert('Error: ' + error.detail);
-                }
-            } catch (error) {
-                alert('Error updating thought: ' + error.message);
-            }
-        }
-
-        // FIXED: Thought deletion
-        async function deleteThought(thoughtId) {
-            if (!confirm('Are you sure you want to delete this thought? All responses will also be deleted.')) {
-                return;
-            }
-
-            try {
-                const response = await makeAuthenticatedRequest(`${API_BASE}/thoughts/${thoughtId}`, {
-                    method: 'DELETE'
-                });
-
-                if (response.ok) {
-                    loadThoughts();
-                    showToast('Thought deleted successfully');
-                } else {
-                    const error = await response.json();
-                    alert('Error: ' + error.detail);
-                }
-            } catch (error) {
-                alert('Error deleting thought: ' + error.message);
-            }
-        }
-
-        // FIXED: Response editing
-        function editResponse(responseId, content) {
-            editingResponseId = responseId;
-            document.getElementById('editResponseContent').value = content;
-            showEditResponseModal();
-        }
-
-        // FIXED: Response editing
-        async function updateResponse() {
-            const content = document.getElementById('editResponseContent').value.trim();
-            if (!content) {
-                alert('Please enter your response');
-                return;
-            }
-
-            try {
-                const response = await makeAuthenticatedRequest(`${API_BASE}/responses/${editingResponseId}`, {
-                    method: 'PUT',
-                    body: JSON.stringify({ content: content })
-                });
-
-                if (response.ok) {
-                    hideEditResponseModal();
-                    loadThoughts();
-                    showToast('Response updated successfully!');
-                } else {
-                    const error = await response.json();
-                    alert('Error: ' + error.detail);
-                }
-            } catch (error) {
-                alert('Error updating response: ' + error.message);
-            }
-        }
-
-        // FIXED: Response deletion
-        async function deleteResponse(responseId) {
-            if (!confirm('Are you sure you want to delete this response?')) {
-                return;
-            }
-
-            try {
-                const response = await makeAuthenticatedRequest(`${API_BASE}/responses/${responseId}`, {
-                    method: 'DELETE'
-                });
-
-                if (response.ok) {
-                    loadThoughts();
-                    showToast('Response deleted successfully');
-                } else {
-                    const error = await response.json();
-                    alert('Error: ' + error.detail);
-                }
-            } catch (error) {
-                alert('Error deleting response: ' + error.message);
-            }
-        }
-
-        // Share functionality
         function shareThought(thoughtId) {
             const url = `${window.location.origin}${window.location.pathname}?thought=${thoughtId}`;
             navigator.clipboard.writeText(url).then(() => {
                 showToast('Thought link copied to clipboard! 📋');
             }).catch(() => {
-                // Fallback for older browsers
+                const tempInput = document.createElement('input');
+                tempInput.value = url;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                showToast('Thought link copied to clipboard! 📋');
+            });
+        }
+
+        async function searchThoughts() {
+            const nickname = document.getElementById('searchInput').value.trim();
+            if (!nickname) {
+                loadThoughts();
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/search/${encodeURIComponent(nickname)}`);
+                if (response.ok) {
+                    const thoughts = await response.json();
+                    displayThoughts(thoughts);
+                    if (thoughts.length === 0) {
+                        document.getElementById('thoughtsList').innerHTML = `
+                            <div class="empty-state">
+                                <h3>No thoughts found</h3>
+                                <p>No thoughts found for user "${nickname}"</p>
+                                <button onclick="loadThoughts()" style="margin-top: 10px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 20px; cursor: pointer;">Show All Thoughts</button>
+                            </div>
+                        `;
+                    }
+                } else {
+                    alert('Error searching for user');
+                }
+            } catch (error) {
+                alert('Error searching: ' + error.message);
+            }
+        }
+    </script> -->
+        <script>
+        // const API_BASE = 'https://whatifback-1.onrender.com';
+        const API_BASE = 'http://127.0.0.1:8000';
+        let currentUser = null;
+        let currentToken = null;
+        let pendingResponse = null;
+
+        // Check for existing session on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedToken = localStorage.getItem('whatif_token');
+            const savedUser = localStorage.getItem('whatif_user');
+            const expiry = localStorage.getItem('whatif_expiry');
+            
+            if (savedToken && savedUser && expiry && new Date(expiry) > new Date()) {
+                currentToken = savedToken;
+                currentUser = savedUser;
+            }
+            updateUserInterface();
+            loadThoughts();
+
+            // Hamburger menu toggle
+            document.querySelector('.hamburger-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.getElementById('hamburgerDropdown').classList.toggle('show');
+            });
+
+            document.addEventListener('click', function() {
+                document.getElementById('hamburgerDropdown').classList.remove('show');
+            });
+        });
+
+        // Update UI based on authentication state
+        function updateUserInterface() {
+            const loginBtn = document.getElementById('loginBtn');
+            const userInfo = document.getElementById('userInfo');
+            const currentUserNickname = document.getElementById('currentUserNickname');
+            const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+            const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
+            const mobileUserInfo = document.getElementById('mobileUserInfo');
+            const mobileUserNickname = document.getElementById('mobileUserNickname');
+            
+            if (currentUser) {
+                loginBtn.style.display = 'none';
+                userInfo.style.display = 'flex';
+                currentUserNickname.textContent = currentUser;
+                
+                mobileLoginBtn.style.display = 'none';
+                mobileLogoutBtn.style.display = 'block';
+                mobileUserInfo.style.display = 'block';
+                mobileUserNickname.textContent = currentUser;
+            } else {
+                loginBtn.style.display = 'block';
+                userInfo.style.display = 'none';
+                
+                mobileLoginBtn.style.display = 'block';
+                mobileLogoutBtn.style.display = 'none';
+                mobileUserInfo.style.display = 'none';
+            }
+        }
+
+        // Handle thought creation with auth check
+        function handleCreateThought() {
+            if (!currentToken) {
+                showAuthModal();
+                return;
+            }
+            showThoughtModal();
+        }
+
+        // Authentication functions
+        function showAuthModal() {
+            document.getElementById('authOverlay').style.display = 'flex';
+        }
+
+        function hideAuthModal() {
+            document.getElementById('authOverlay').style.display = 'none';
+            document.getElementById('nicknameInput').value = '';
+        }
+
+        async function registerUser() {
+            const nickname = document.getElementById('nicknameInput').value.trim();
+            if (!nickname) {
+                alert('Please enter a nickname');
+                return;
+            }
+
+            if (nickname.length < 2) {
+                alert('Nickname must be at least 2 characters long');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ nickname })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    currentToken = data.token;
+                    currentUser = nickname;
+                    
+                    localStorage.setItem('whatif_token', data.token);
+                    localStorage.setItem('whatif_user', nickname);
+                    localStorage.setItem('whatif_expiry', data.expires_at);
+                    
+                    hideAuthModal();
+                    updateUserInterface();
+                    
+                    if (pendingResponse) {
+                        await createResponseDirectly(pendingResponse.thoughtId, pendingResponse.content);
+                        pendingResponse = null;
+                    }
+                    
+                    loadThoughts();
+                    showToast('Welcome to WhatIfVerse! 🎉');
+                } else {
+                    const error = await response.json();
+                    alert('Error: ' + error.detail);
+                }
+            } catch (error) {
+                alert('Error registering user. Please make sure the backend server is running.');
+            }
+        }
+
+        async function createResponseDirectly(thoughtId, content) {
+            if (!content.trim()) return;
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/responses`, {
+                    method: 'POST',
+                    body: JSON.stringify({ thought_id: thoughtId, content: content })
+                });
+
+                if (response.ok) {
+                    showToast('Response posted successfully!');
+                    return true;
+                } else {
+                    const error = await response.json();
+                    console.error('Error creating response:', error);
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error creating response:', error);
+                return false;
+            }
+        }
+
+        function logout() {
+            currentToken = null;
+            currentUser = null;
+            localStorage.removeItem('whatif_token');
+            localStorage.removeItem('whatif_user');
+            localStorage.removeItem('whatif_expiry');
+            updateUserInterface();
+            loadThoughts();
+            showToast('Logged out successfully');
+        }
+
+        // API call wrapper with auth check
+        async function makeAuthenticatedRequest(url, options = {}) {
+            if (!currentToken) {
+                showAuthModal();
+                throw new Error('Authentication required');
+            }
+
+            const defaultOptions = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': currentToken,
+                    ...options.headers
+                }
+            };
+
+            const finalOptions = { ...defaultOptions, ...options };
+            
+            const response = await fetch(url, finalOptions);
+            if (response.status === 401) {
+                localStorage.removeItem('whatif_token');
+                localStorage.removeItem('whatif_user');
+                localStorage.removeItem('whatif_expiry');
+                currentToken = null;
+                currentUser = null;
+                updateUserInterface();
+                showAuthModal();
+                throw new Error('Session expired. Please login again.');
+            }
+            return response;
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Thought management
+        async function loadThoughts() {
+            try {
+                const response = await fetch(`${API_BASE}/thoughts`);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const thoughts = await response.json();
+                displayThoughts(thoughts);
+            } catch (error) {
+                console.error('Error loading thoughts:', error);
+                document.getElementById('thoughtsList').innerHTML = 
+                    '<div class="error">Error loading thoughts. Please check if the backend server is running.</div>';
+            }
+        }
+
+        function displayThoughts(thoughts) {
+            const container = document.getElementById('thoughtsList');
+            
+            if (thoughts.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No thoughts yet</h3>
+                        <p>Be the first to share a WhatIf thought!</p>
+                        ${!currentUser ? '<p><em>Create an account to start sharing</em></p>' : ''}
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = thoughts.map(thought => `
+                <div class="thought-card">
+                    <div class="thought-header">
+                        <div class="thought-user">
+                            <div class="nickname-badge">${thought.user_nickname}</div>
+                        </div>
+                        <div class="thought-actions">
+                            <button class="share-btn" onclick="shareThought('${thought._id}')">Share</button>
+                        </div>
+                    </div>
+                    <div class="whatif-thought">${thought.content}</div>
+                    
+                    <div class="responses-section">
+                        <h3>Top Responses:</h3>
+                        <div class="top-responses">
+                            ${(thought.top_responses || []).slice(0, 2).map((response, index) => `
+                                <div class="response-card top-${index + 1}">
+                                    <div class="rank-badge rank-${index + 1}">${index + 1}</div>
+                                    <div class="response-header">
+                                        <div class="response-user">
+                                            <div class="response-nickname">${response.user_nickname || 'Anonymous'}</div>
+                                        </div>
+                                    </div>
+                                    <div class="response-content">${response.content}</div>
+                                    <div class="response-footer">
+                                        <div class="like-section">
+                                            <button class="like-btn" onclick="likeResponse('${response._id}')">
+                                                🤍 Like
+                                            </button>
+                                            <span class="like-count">${response.like_count || 0}</span>
+                                        </div>
+                                        ${index === 0 ? `<button class="view-insight-btn" onclick="showInsight('${response._id}')">View Insight</button>` : ''}
+                                    </div>
+                                </div>
+                            `).join('')}
+                            ${(thought.top_responses || []).length === 0 ? '<p>No responses yet. Be the first to respond!</p>' : ''}
+                        </div>
+
+                        ${(thought.other_responses || []).length > 0 ? `
+                            <div class="other-responses">
+                                <h4>Other Responses:</h4>
+                                ${thought.other_responses.map(response => `
+                                    <div class="other-response">
+                                        <div class="response-header">
+                                            <div class="response-user">
+                                                <div class="response-nickname">${response.user_nickname || 'Anonymous'}</div>
+                                            </div>
+                                        </div>
+                                        <div class="response-content">${response.content}</div>
+                                        <div class="response-footer">
+                                            <div class="like-section">
+                                                <button class="like-btn" onclick="likeResponse('${response._id}')">
+                                                    🤍 Like
+                                                </button>
+                                                <span class="like-count">${response.like_count || 0}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                                ${thought.total_responses > 7 ? `<p>... and ${thought.total_responses - 7} more responses</p>` : ''}
+                            </div>
+                        ` : ''}
+
+                        <div class="add-response">
+                            <input type="text" id="response-${thought._id}" placeholder="Add your response..." onkeypress="if(event.key === 'Enter') createResponse('${thought._id}')">
+                            <button onclick="createResponse('${thought._id}')">Respond</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // FIXED LIKE FUNCTION - SIMPLE VERSION
+        async function likeResponse(responseId) {
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/like`, {
+                    method: 'POST',
+                    body: JSON.stringify({ response_id: responseId })
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    showToast(result.message);
+                    loadThoughts(); // Refresh to show updated like count
+                } else {
+                    const error = await response.json();
+                    alert('Error: ' + error.detail);
+                }
+            } catch (error) {
+                if (error.message !== 'Authentication required') {
+                    alert('Error liking response: ' + error.message);
+                }
+            }
+        }
+
+        // Modal functions
+        function showThoughtModal() {
+            document.getElementById('thoughtModal').style.display = 'flex';
+        }
+
+        function hideThoughtModal() {
+            document.getElementById('thoughtModal').style.display = 'none';
+            document.getElementById('thoughtContent').value = '';
+        }
+
+        function showInsight(responseId) {
+            document.getElementById('insightContent').innerHTML = `
+                <div class="top-response-insight">
+                    <h3>🌟 Top Ranked Response Insight</h3>
+                    <p>This response received the most likes from the community because it was the most engaging, creative, and thought-provoking.</p>
+                    <p><strong>Why it works:</strong></p>
+                    <ul>
+                        <li>Creative thinking outside the box</li>
+                        <li>Clear and engaging presentation</li>
+                        <li>Positive community reception</li>
+                    </ul>
+                </div>
+            `;
+            document.getElementById('insightModal').style.display = 'flex';
+        }
+
+        function hideInsightModal() {
+            document.getElementById('insightModal').style.display = 'none';
+        }
+
+        // API interaction functions
+        async function createThought() {
+            const content = document.getElementById('thoughtContent').value.trim();
+            if (!content) {
+                alert('Please enter your thought');
+                return;
+            }
+
+            if (content.length < 10) {
+                alert('Thought should be at least 10 characters long');
+                return;
+            }
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/thoughts`, {
+                    method: 'POST',
+                    body: JSON.stringify({ content })
+                });
+
+                if (response.ok) {
+                    hideThoughtModal();
+                    loadThoughts();
+                    showToast('Thought shared successfully! 🎉');
+                } else {
+                    const error = await response.json();
+                    alert(error.detail);
+                }
+            } catch (error) {
+                if (error.message !== 'Authentication required') {
+                    alert('Error creating thought: ' + error.message);
+                }
+            }
+        }
+
+        async function createResponse(thoughtId) {
+            const input = document.getElementById(`response-${thoughtId}`);
+            const content = input.value.trim();
+            
+            if (!content) {
+                alert('Please enter your response');
+                return;
+            }
+
+            if (!currentToken) {
+                pendingResponse = { thoughtId: thoughtId, content: content };
+                input.value = '';
+                showAuthModal();
+                return;
+            }
+
+            try {
+                const response = await makeAuthenticatedRequest(`${API_BASE}/responses`, {
+                    method: 'POST',
+                    body: JSON.stringify({ thought_id: thoughtId, content: content })
+                });
+
+                if (response.ok) {
+                    input.value = '';
+                    loadThoughts();
+                    showToast('Response posted successfully!');
+                } else {
+                    const error = await response.json();
+                    alert(error.detail);
+                }
+            } catch (error) {
+                if (error.message !== 'Authentication required') {
+                    alert('Error creating response: ' + error.message);
+                }
+            }
+        }
+
+        function shareThought(thoughtId) {
+            const url = `${window.location.origin}${window.location.pathname}?thought=${thoughtId}`;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('Thought link copied to clipboard! 📋');
+            }).catch(() => {
                 const tempInput = document.createElement('input');
                 tempInput.value = url;
                 document.body.appendChild(tempInput);
